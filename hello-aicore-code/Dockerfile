@@ -1,20 +1,17 @@
-# Use official Python image
-FROM python:3.7-slim
-
-# Set working directory inside the container
-WORKDIR /app/src/
-
-# Copy model, code, and requirements to the container
-COPY main.py .
-COPY model.joblib .
-COPY requirements.txt .
-
-# Install dependencies
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-# Give full permissions (good for SAP AI Core environments)
-RUN chgrp -R 65534 /app && chmod -R 777 /app
-
-# Run the main.py script with input when container is triggered
-ENTRYPOINT ["python", "main.py"]
+# Specify which base layers (default dependencies) to use
+# You may find more base layers at https://hub.docker.com/
+FROM python:3.7
+#
+# Creates directory within your Docker image
+RUN mkdir -p /app/src/
+#
+# Copies file from your Local system TO path in Docker image
+COPY main.py /app/src/
+COPY requirements.txt /app/src/
+#
+# Installs dependencies within you Docker image
+RUN pip3 install -r /app/src/requirements.txt
+#
+# Enable permission to execute anything inside the folder app
+RUN chgrp -R 65534 /app && \
+    chmod -R 777 /app
