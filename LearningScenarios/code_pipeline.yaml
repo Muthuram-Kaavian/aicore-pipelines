@@ -1,28 +1,48 @@
-apiVersion: argoproj.io/v1alpha1More actions
+# apiVersion: argoproj.io/v1alpha1More actions
+# kind: WorkflowTemplate
+# metadata:
+#   name: code-pipeline # executable id, must be unique across all your workflows (YAML files), please modify this to any value (e.g. code-pipeline-12345) if you are not the only user of your SAP AI Core instance.
+#   annotations:
+#     scenarios.ai.sap.com/description: "Tutorial to add custom code to SAP AI Core"
+#     scenarios.ai.sap.com/name: "Code (Tutorial)"
+#     executables.ai.sap.com/description: "Trains model on median house prices"
+#     executables.ai.sap.com/name: "House Price (Sklearn Example)"
+#   labels:
+#     scenarios.ai.sap.com/id: "learning-code"
+#     ai.sap.com/version: "2.0"
+# spec:
+#   imagePullSecrets:
+#     - name: credstutorialrepo # your docker registry secret
+#   entrypoint: mypipeline
+#   templates:
+#   - name: mypipeline
+#     steps:
+#     - - name: mypredictor
+#         template: mycodeblock1
+
+#   - name: mycodeblock1
+#     container:
+#       image: docker.io/muthurammurugan/house-price:02 # Your docker image name
+#       command: ["/bin/sh", "-c"]
+#       args:
+#         - "python /app/src/main.py"
+
+apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: code-pipeline # executable id, must be unique across all your workflows (YAML files), please modify this to any value (e.g. code-pipeline-12345) if you are not the only user of your SAP AI Core instance.
-  annotations:
-    scenarios.ai.sap.com/description: "Tutorial to add custom code to SAP AI Core"
-    scenarios.ai.sap.com/name: "Code (Tutorial)"
-    executables.ai.sap.com/description: "Trains model on median house prices"
-    executables.ai.sap.com/name: "House Price (Sklearn Example)"
+  name: house-price-pipeline
   labels:
-    scenarios.ai.sap.com/id: "learning-code"
-    ai.sap.com/version: "2.0"
+    scenarios.ai.sap.com/id: house-price-scenario
+    ai.sap.com/version: "1.0"
 spec:
-  imagePullSecrets:
-    - name: credstutorialrepo # your docker registry secret
-  entrypoint: mypipeline
+  entrypoint: run
   templates:
-  - name: mypipeline
-    steps:
-    - - name: mypredictor
-        template: mycodeblock1
+    - name: run
+      steps:
+        - - name: predictor
+            template: predictor-task
 
-  - name: mycodeblock1
-    container:
-      image: docker.io/muthurammurugan/house-price:02 # Your docker image name
-      command: ["/bin/sh", "-c"]
-      args:
-        - "python /app/src/main.py"
+    - name: predictor-task
+      container:
+        image: docker.io/<your-dockerhub-username>/house-price:03
+        command: [ "python", "/app/src/main.py" ]
