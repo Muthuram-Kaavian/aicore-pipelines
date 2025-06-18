@@ -17,16 +17,11 @@
 #     chmod -R 777 /app
 
 
-FROM python:3.7-slim
+FROM python:3.10-slim
 
 WORKDIR /app
+COPY . .
 
-COPY predict.py .
-COPY model.joblib .
-COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
-
-EXPOSE 8080
-
-ENTRYPOINT ["python", "predict.py"]
+CMD ["python", "main.py"]
