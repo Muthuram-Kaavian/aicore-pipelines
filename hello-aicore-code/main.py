@@ -1,11 +1,12 @@
 # Load Datasets
 from sklearn import datasets
 data_house = datasets.fetch_california_housing(data_home='/app/src')
+
 X = data_house['data']
 y = data_house['target']
 #
 # Partition into Train and test dataset
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split 
 train_x, test_x, train_y, test_y = train_test_split(X, y, test_size=0.3)
 #
 # Init model
