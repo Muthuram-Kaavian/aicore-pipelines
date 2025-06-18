@@ -1,4 +1,4 @@
-# Load DatasetsMore actions
+# Load Datasets
 from sklearn import datasets
 data_house = datasets.fetch_california_housing(data_home='/app/src')
 X = data_house['data']
@@ -19,5 +19,4 @@ clf.fit(train_x, train_y)
 test_r2_score = clf.score(test_x, test_y)
 # Output will be available in logs of SAP AI Core.
 # Not the ideal way of storing /reporting metrics in SAP AI Core, but that is not the focus this tutorial
-print(f"Test Data Score {test_r2_score}")
 print(f"Test Data Score {test_r2_score}")
