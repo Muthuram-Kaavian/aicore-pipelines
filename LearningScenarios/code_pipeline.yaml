@@ -25,4 +25,4 @@ spec:
       image: docker.io/muthurammurugan/house-price:02 # Your docker image name
       command: ["/bin/sh", "-c"]
       args:
-        - "python /hello-aicore-code/main.py"
+        - "python /app/src/main.py"
