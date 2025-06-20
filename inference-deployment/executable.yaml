@@ -1,10 +1,8 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: Executable
 metadata:
-  name: house-price-executable
+  name: house-price-pipeline
+  labels:
+    scenarios.ai.sap.com/id: house-price-prediction-scenario
 spec:
-  scenarioName: house-price-prediction-scenario
-  image: docker.io/muthurammurugan/house-price:03
-  type: infer
-  inputPorts: []
-  outputPorts: []
+  description: "House Price Prediction Pipeline"

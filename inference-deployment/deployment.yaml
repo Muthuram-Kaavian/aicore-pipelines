@@ -2,7 +2,9 @@ apiVersion: ai.sap.com/v1alpha1
 kind: Deployment
 metadata:
   name: house-price-deployment
+  labels:
+    scenarios.ai.sap.com/id: house-price-prediction-scenario
+    executables.ai.sap.com/id: house-price-pipeline
 spec:
-  scenarioName: house-price-prediction-scenario
-  executableName: house-price-executable
-  inputs: {}
+  template:
+    name: house-price-pipeline
