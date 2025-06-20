@@ -44,5 +44,5 @@ spec:
 
     - name: predictor-task
       container:
-        image: docker.io/<your-dockerhub-username>/house-price:03
+        image: docker.io/muthurammurugan/house-price:03
         command: [ "python", "/app/src/main.py" ]
