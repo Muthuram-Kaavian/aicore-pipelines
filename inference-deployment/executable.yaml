@@ -1,0 +1,10 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: Executable
+metadata:
+  name: house-price-executable
+spec:
+  scenarioName: house-price-scenario
+  image: docker.io/muthurammurugan/house-price:03
+  type: infer
+  inputPorts: []
+  outputPorts: []
