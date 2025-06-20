@@ -1,8 +1,0 @@
-apiVersion: ai.sap.com/v1alpha1
-kind: Executable
-metadata:
-  name: house-price-pipeline
-  labels:
-    scenarios.ai.sap.com/id: house-price-prediction-scenario
-spec:
-  description: "House Price Prediction Model"
