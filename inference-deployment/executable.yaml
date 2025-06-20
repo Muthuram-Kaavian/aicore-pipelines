@@ -5,4 +5,4 @@ metadata:
   labels:
     scenarios.ai.sap.com/id: house-price-prediction-scenario
 spec:
-  description: "House Price Prediction Pipeline"
+  description: "House Price Prediction Model"

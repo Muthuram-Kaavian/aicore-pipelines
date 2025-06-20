@@ -3,4 +3,4 @@ kind: Scenario
 metadata:
   name: house-price-prediction-scenario
 spec:
-  description: "Predict California house prices using Decision Tree"
+  description: "Predict house prices using a trained model"
