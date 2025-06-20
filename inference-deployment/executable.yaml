@@ -3,7 +3,7 @@ kind: Executable
 metadata:
   name: house-price-executable
 spec:
-  scenarioName: house-price-scenario
+  scenarioName: house-price-prediction-scenario
   image: docker.io/muthurammurugan/house-price:03
   type: infer
   inputPorts: []

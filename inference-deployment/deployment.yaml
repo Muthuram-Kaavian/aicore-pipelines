@@ -3,6 +3,6 @@ kind: Deployment
 metadata:
   name: house-price-deployment
 spec:
-  scenarioName: house-price-scenario
+  scenarioName: house-price-prediction-scenario
   executableName: house-price-executable
   inputs: {}
