@@ -1,0 +1,6 @@
+apiVersion: ai.sap.com/v1alpha1
+kind: Scenario
+metadata:
+  name: house-price-scenario
+spec:
+  description: "Deploy house price prediction model"
