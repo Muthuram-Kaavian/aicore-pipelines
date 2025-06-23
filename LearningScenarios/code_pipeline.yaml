@@ -3,7 +3,7 @@ kind: WorkflowTemplate
 metadata:
   name: house-price-pipeline
   labels:
-    scenarios.ai.sap.com/id: house-price-prediction
+    scenarios.ai.sap.com/id: house-price
     ai.sap.com/version: "1.0"
 spec:
   entrypoint: run
