@@ -22,27 +22,37 @@
 # test_score = clf.score(test_x, test_y)
 # print(f"Test Data Score: {test_score}")
 
-
-# Load Datasets
-from sklearn import datasets
-data_house = datasets.fetch_california_housing()
-X = data_house['data']
-y = data_house['target']
-#
-# Partition into Train and test dataset
+import pandas as pd
+import joblib
 from sklearn.model_selection import train_test_split
-train_x, test_x, train_y, test_y = train_test_split(X, y, test_size=0.3)
-#
-# Init model
 from sklearn.tree import DecisionTreeRegressor
+
+# Load dataset from public URL
+url = "https://raw.githubusercontent.com/sap-tutorials/Tutorials/master/tutorials/ai-core-data/train.csv"
+df = pd.read_csv(url)
+
+# Print to verify
+print("Columns in dataset:", df.columns.tolist())
+
+# Separate features and target
+X = df.drop(columns=["target"])   # Features
+y = df["target"]                  # Target column
+
+# Partition into train and test sets
+train_x, test_x, train_y, test_y = train_test_split(X, y, test_size=0.3)
+
+# Initialize model
 clf = DecisionTreeRegressor()
-#
+
 # Train model
 clf.fit(train_x, train_y)
-#
-# Test model
+
+# Evaluate model
 test_r2_score = clf.score(test_x, test_y)
 
-# Output will be available in logs of SAP AI Core.
-# Not the ideal way of storing /reporting metrics in SAP AI Core, but that is not the focus this tutorial
-print(f"Test Data Score {test_r2_score}")
+# Save model to file
+joblib.dump(clf, "house_price_model.joblib")
+
+# Output result (will appear in SAP AI Core logs)
+print(f"Test Data Score: {test_r2_score}")
+print("Model saved as house_price_model.joblib")

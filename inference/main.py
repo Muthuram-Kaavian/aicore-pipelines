@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 # Load the saved model
-model = joblib.load("model.joblib")
+model = joblib.load("house_price_model.joblib")
 
 # Feature order
 FEATURE_ORDER = ["MedInc", "HouseAge", "AveRooms", "AveBedrms",
