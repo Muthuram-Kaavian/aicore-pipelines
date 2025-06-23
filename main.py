@@ -54,5 +54,5 @@ test_r2_score = clf.score(test_x, test_y)
 joblib.dump(clf, "house_price_model.joblib")
 
 # Output result (will appear in SAP AI Core logs)
-print(f"Test Data Score: {test_r2_score}")
+print(f"Test Score: {test_r2_score}")
 print("Model saved as house_price_model.joblib")
