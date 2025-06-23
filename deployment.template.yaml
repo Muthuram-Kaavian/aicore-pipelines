@@ -1,0 +1,11 @@
+name: house-price-infer
+scenario: house-price-api
+kind: deployment
+description: House price inference service
+
+spec:
+  image: docker.io/muthurammurugan/house-price:03
+  ports:
+    - 5000
+  command: ["python3", "inference.py"]
+  type: serving
