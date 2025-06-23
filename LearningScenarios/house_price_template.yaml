@@ -1,48 +1,49 @@
 apiVersion: ai.sap.com/v1alpha1
 kind: ServingTemplate
 metadata:
-  name: house-price-server
+  name: house-server-pipeline
   annotations:
-    scenarios.ai.sap.com/name: "House Price"
-    scenarios.ai.sap.com/description: "Predict house prices using a trained model"
+    scenarios.ai.sap.com/name: "House Price Prediction"
+    scenarios.ai.sap.com/description: "Server to predict house prices"
     executables.ai.sap.com/name: "server"
-    executables.ai.sap.com/description: "Serving endpoint for predictions"
-    artifacts.ai.sap.com/housepricemodel.kind: "model"  # type of artifact input
+    executables.ai.sap.com/description: "Flask server for online inference"
+    artifacts.ai.sap.com/housepricemodel.kind: "model"
   labels:
-    scenarios.ai.sap.com/id: "house-price"
+    scenarios.ai.sap.com/id: house-price
     ai.sap.com/version: "1.0"
 spec:
   inputs:
     artifacts:
-      - name: housepricemodel  # model artifact ID (uploaded separately)
+      - name: housepricemodel
     parameters:
       - name: greetmessage
         type: string
   template:
-    apiVersion: serving.kserve.io/v1beta1
+    apiVersion: "serving.kserve.io/v1beta1"
     metadata:
       annotations: |
         autoscaling.knative.dev/metric: concurrency
         autoscaling.knative.dev/target: 1
         autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
-        ai.sap.com/resourcePlan: starter  # use "starter" or "infer-cpu" or "infer-gpu"
+        ai.sap.com/resourcePlan: starter
     spec: |
       predictor:
         imagePullSecrets:
-          - name: credstutorialrepo  # your DockerHub secret name in SAP AI Core
+          - name: credstutorialrepo
         minReplicas: 1
         maxReplicas: 2
         containers:
           - name: kserve-container
-            image: docker.io/muthurammurugan/house-price:03
+            image: "docker.io/muthurammurugan/house-server:01"
             ports:
               - containerPort: 9001
-                protocol: TCP
             command: ["/bin/sh", "-c"]
             args:
               - >
-                set -e && echo "Starting..." && gunicorn --chdir /app/src main:app -b 0.0.0.0:9001
+                set -e &&
+                echo "Starting" &&
+                gunicorn --chdir /app/src main:app -b 0.0.0.0:9001
             env:
               - name: STORAGE_URI
                 value: "{{inputs.artifacts.housepricemodel}}"
