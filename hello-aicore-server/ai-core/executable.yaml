@@ -1,0 +1,9 @@
+apiVersion: aic.sap.com/v1alpha1
+kind: Executable
+metadata:
+  name: house-price-infer
+  annotations:
+    scenarios.ai.sap.com/description: House price prediction service
+spec:
+  image: docker.io/<your-username>/house-price:latest
+  command: ["python3", "main.py"]
