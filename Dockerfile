@@ -21,14 +21,12 @@ FROM python:3.11
 
 WORKDIR /app
 
-COPY app/main.py /app/
-COPY app/house_price_model.joblib /app/
-COPY app/requirements.txt /app/
+COPY inference/inference.py /app/
+COPY inference/house_price_model.joblib /app/
+COPY inference/requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-CMD ["python", "main.py"]
-
-
+CMD ["python3", "inference.py"]
