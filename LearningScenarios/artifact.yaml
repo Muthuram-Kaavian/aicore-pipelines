@@ -1,8 +1,0 @@
-apiVersion: ai.sap.com/v1alpha1
-kind: Artifact
-metadata:
-  name: housepricemodel
-spec:
-  scenarioName: house-price
-  type: model
-  uri: file://house_price_model.joblib
