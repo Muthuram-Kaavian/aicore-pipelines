@@ -5,4 +5,4 @@ metadata:
 spec:
   scenarioName: house-price
   type: model
-  uri: file://house_price_model.joblib
+  uri: file:/inference/house_price_model.joblib
