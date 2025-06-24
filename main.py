@@ -38,7 +38,7 @@ print("Columns in dataset:", df.columns.tolist())
 X = df.drop(columns=["target"])   # Features
 y = df["target"]                  # Target column
 
-# Partition into train and test sets
+# Partition into training set 70% and test set 30%
 train_x, test_x, train_y, test_y = train_test_split(X, y, test_size=0.3)
 
 # Initialize model

@@ -7,14 +7,14 @@ metadata:
     scenarios.ai.sap.com/description: "Predict house prices using a trained model"
     executables.ai.sap.com/name: "server"
     executables.ai.sap.com/description: "Serving endpoint for predictions"
-    artifacts.ai.sap.com/housepricemodel.kind: "model"  # type of artifact input
+    artifacts.ai.sap.com/housepricemodel.kind: "model"  # model artifact type
   labels:
     scenarios.ai.sap.com/id: "house-price"
     ai.sap.com/version: "1.0"
 spec:
   inputs:
     artifacts:
-      - name: housepricemodel  # model artifact ID (uploaded separately)
+      - name: housepricemodel
     parameters:
       - name: greetmessage
         type: string
@@ -26,11 +26,11 @@ spec:
         autoscaling.knative.dev/target: 1
         autoscaling.knative.dev/targetBurstCapacity: 0
       labels: |
-        ai.sap.com/resourcePlan: starter  # use "starter" or "infer-cpu" or "infer-gpu"
+        ai.sap.com/resourcePlan: starter  # you can also try infer-cpu
     spec: |
       predictor:
         imagePullSecrets:
-          - name: credstutorialrepo  # your DockerHub secret name in SAP AI Core
+          - name: credstutorialrepo  # this must match your DockerHub registry secret
         minReplicas: 1
         maxReplicas: 2
         containers:
@@ -42,7 +42,9 @@ spec:
             command: ["/bin/sh", "-c"]
             args:
               - >
-                set -e && echo "Starting..." && gunicorn --chdir /app/src main:app -b 0.0.0.0:9001
+                set -e &&
+                echo "Starting model..." &&
+                gunicorn --chdir /app/src main:app -b 0.0.0.0:9001
             env:
               - name: STORAGE_URI
                 value: "{{inputs.artifacts.housepricemodel}}"
