@@ -1,7 +1,0 @@
-apiVersion: ai.sap.com/v1alpha1
-kind: Executable
-metadata:
-  name: server
-spec:
-  scenarioName: house-price
-  templateName: house-price-server

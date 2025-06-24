@@ -1,6 +1,0 @@
-apiVersion: ai.sap.com/v1alpha1
-kind: Scenario
-metadata:
-  name: house-price
-spec:
-  displayName: "House Price"
